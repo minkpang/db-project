@@ -32,51 +32,51 @@ print('received ')
 
 msg2 = client_socket.recv(20000000)
 print(pickle.loads(msg2))
-stag=(pickle.loads(msg2))
+stag = (pickle.loads(msg2))
 
-V=[]
-B=1
-i=1
-list=[]
-while B==1:
-    k1=bin(i)
+V = []
+B = 1
+i = 1
+list = []
+while B == 1:
+    k1 = bin(i)
     b_cipher = AES.new(pad(k1.encode("utf8"),BLOCK_SIZE), AES.MODE_ECB)
     f = b_cipher.encrypt(stag)
     m = SHA256.new()
-    hex=m.update(f)
-    H=m.hexdigest()
+    hex = m.update(f)
+    H = m.hexdigest()
 
-    B1=int(H,16)
-    b=(bin(B1)[213:220])
-    K=(bin(B1)[2:131])
-    L=(bin(B1)[132:212])
-    b=(int(b,2)%98)
+    B1 = int(H, 16)
+    b = (bin(B1)[213:220])
+    K = (bin(B1)[2:131])
+    L = (bin(B1)[132:212])
+    b = (int(b, 2) % 98)
 
     for j in range(21):
-        label=Tset[b][j].keys()
-        value=Tset[b][j].values()
-        label2=(str(label))[12:92]
-        value2=(str(value))[14:143]
+        label = Tset[b][j].keys()
+        value = Tset[b][j].values()
+        label2 = (str(label))[12:92]
+        value2 = (str(value))[14:143]
 
-        if label2==L:
+        if label2 == L:
             print('success')
-            d=""
+            d = ""
             for o in range(129):
-                if value2[o]==K[o]:
-                    d=d+"0"
+                if value2[o] == K[o]:
+                    d = d + "0"
                 else:
-                    d=d+"1"
-            v=d
+                    d = d + "1"
+            v = d
             print(v)
             print('***')
-            B2=(str(v)[0])
+            B2 = (str(v)[0])
             print("B2:")
             print(B2)
-            B=int(B2)
-            ID=(str(v)[1:129])
+            B = int(B2)
+            ID = (str(v)[1:129])
             V.append(ID)
             print(V)
-    i=i+1
+    i = i + 1
 print('**')
 pV = pickle.dumps(V)
 client_socket.sendall(pV)
