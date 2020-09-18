@@ -27,21 +27,21 @@ BUFSIZE = 1024
 ADDR = (HOST, PORT)
 
 clientSocket = socket(AF_INET, SOCK_STREAM)# 서버에 접속하기 위한 소켓을 생성한다.
-W=[]
+W = []
 string_pool = string.ascii_letters
-Ks=""
+Ks = ""
 for i in range(16):
     Ks += random.choice(string_pool)
 
 c_cipher = AES.new(Ks.encode("utf8"), AES.MODE_ECB)
 c_decipher = AES.new(Ks.encode("utf8"), AES.MODE_ECB)
 
-files=glob.glob('*.txt')
+files = glob.glob('*.txt')
 for file in files:
     with open(file, 'r') as f:
         while True:
-            line=(f.readline().rstrip())
-            if line! = '':
+            line = (f.readline().rstrip())
+            if line != '':
                 W.append(line)
             if not line : break
 
