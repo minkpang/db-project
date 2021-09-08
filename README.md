@@ -1,3 +1,3 @@
 # db-project
 single keyword search on encrypted DB
-동형 암호 프로젝트
+'Highly-scalable searchable symmetric encryption with support for Boolean queries'  논문을 바탕으로 제시해주신 시나리오에서의 솔루션 개발을 했습니다.
